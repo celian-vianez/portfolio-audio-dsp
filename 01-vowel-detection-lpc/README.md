@@ -1,23 +1,23 @@
-# Détection de voyelles par prédiction linéaire (LPC)
+# Vowel detection by linear prediction (LPC)
 
-Script MATLAB qui identifie la voyelle prononcée à partir des formants estimés par un modèle autorégressif.
+MATLAB script that identifies the spoken vowel from the formants estimated by an autoregressive model.
 
-## Méthode
+## Method
 
-1. Spectrogramme de Gabor (fenêtre gaussienne) pour repérer visuellement les formants sur un segment.
-2. Modèle AR d'ordre 10 (`aryule`, équations de Yule-Walker) ; choix de l'ordre guidé par la fonction d'autocorrélation partielle.
-3. Les pôles du filtre sont convertis en fréquences et en largeurs de bande. On garde les pôles au-dessus de 90 Hz avec une largeur de bande inférieure à 400 Hz, soit les trois premiers formants F1–F3.
-4. La voyelle est la plus proche (distance euclidienne) dans une table de formants de référence pour le français, l'anglais britannique ou l'anglais américain.
-5. Analyse trame par trame (fenêtres de 60 ms, pas de 25 ms) avec rejet des trames silencieuses, pondération de F1 et rejet des détections trop éloignées de la table.
+1. Gabor spectrogram (Gaussian window) to visually locate the formants on a segment.
+2. AR model of order 10 (`aryule`, Yule-Walker equations); the choice of order is guided by the partial autocorrelation function.
+3. The filter poles are converted into frequencies and bandwidths. Poles above 90 Hz with a bandwidth below 400 Hz are kept, i.e. the first three formants F1–F3.
+4. The vowel is the closest one (Euclidean distance) in a table of reference formants for French, British English or American English.
+5. Frame-by-frame analysis (60 ms windows, 25 ms hop) with rejection of silent frames, weighting of F1 and rejection of detections too far from the table.
 
-Une annotation manuelle des voyelles (instants et voyelles corrigés) figure en fin de script pour comparer les détections.
+A manual annotation of the vowels (corrected times and vowels) is included at the end of the script to compare the detections.
 
-## Dépendances
+## Dependencies
 
-- MATLAB avec Signal Processing Toolbox
+- MATLAB with the Signal Processing Toolbox
 - [LTFAT](https://ltfat.github.io) (`gabwin`, `dgtreal`, `plotdgtreal`)
-- Un fichier audio `audio/male_fr.wav` (non fourni)
+- An audio file `audio/male_fr.wav` (not provided)
 
-## Limites
+## Limitations
 
-La table de formants est indicative (valeurs moyennes) et la comparaison avec l'annotation manuelle est visuelle ; aucune métrique de précision n'est calculée.
+The formant table is indicative (average values) and the comparison with the manual annotation is visual; no accuracy metric is computed.

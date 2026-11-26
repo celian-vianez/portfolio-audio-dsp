@@ -1,27 +1,27 @@
-# Plugin d'effets spectraux (C++ / JUCE)
+# Spectral effects plugin (C++ / JUCE)
 
-Plugin audio temps réel qui traite le signal dans le domaine fréquentiel par STFT (FFT de 1024 points, recouvrement de 4, fenêtre de Hann, overlap-add).
+Real-time audio plugin that processes the signal in the frequency domain using an STFT (1024-point FFT, overlap factor of 4, Hann window, overlap-add).
 
-## Effets
+## Effects
 
-- **Robotisation** : mise à zéro de la phase de chaque bin (on ne garde que le module).
-- **Pitch shift** en demi-tons : redistribution des bins avec le rapport `2^(n/12)`.
-- **Spectral gate** : mise à zéro des bins dont le module est sous un seuil.
-- **Harmonizer** : ajout d'une voix décalée en demi-tons au spectre d'origine.
-- **Spectral blur** : lissage du spectre sur un rayon réglable.
+- **Robotization**: the phase of each bin is set to zero (only the magnitude is kept).
+- **Pitch shift** in semitones: redistribution of the bins with the ratio `2^(n/12)`.
+- **Spectral gate**: bins whose magnitude is below a threshold are set to zero.
+- **Harmonizer**: a voice shifted by a number of semitones is added to the original spectrum.
+- **Spectral blur**: smoothing of the spectrum over an adjustable radius.
 
-Les paramètres sont exposés via `AudioProcessorValueTreeState`.
+The parameters are exposed through `AudioProcessorValueTreeState`.
 
-## Fichiers
+## Files
 
-- `FFTProcessor.hpp/.cpp` : moteur STFT et traitement du spectre
-- `PluginProcessor.h/.cpp` : paramètres et traitement par canal
-- `PluginEditor.h/.cpp` : interface
+- `FFTProcessor.hpp/.cpp`: STFT engine and spectrum processing
+- `PluginProcessor.h/.cpp`: parameters and per-channel processing
+- `PluginEditor.h/.cpp`: user interface
 
-## Compilation
+## Building
 
-Le projet Projucer et le module JUCE ne sont pas inclus : créer un projet de plugin audio JUCE vide et remplacer les fichiers source par ceux de ce dossier.
+The Projucer project and the JUCE module are not included: create an empty JUCE audio plugin project and replace its source files with the ones in this folder.
 
-## Limites
+## Limitations
 
-Approche pédagogique : le décalage de hauteur est fait par simple remapping de bins, sans suivi de phase (pas de phase vocoder complet), donc la qualité est limitée.
+Educational approach: pitch shifting is done by simple bin remapping, without phase tracking (no full phase vocoder), so the quality is limited.
