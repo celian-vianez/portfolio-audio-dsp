@@ -1,19 +1,19 @@
-# Débruitage de parole dans le domaine de Gabor
+# Speech denoising in the Gabor domain
 
-Script MATLAB de débruitage par seuillage doux des coefficients d'une transformée de Gabor discrète (DGT).
+MATLAB script for denoising by soft thresholding of the coefficients of a discrete Gabor transform (DGT).
 
-## Méthode
+## Method
 
-1. Ajout d'un bruit blanc gaussien à un signal de parole.
-2. DGT avec fenêtre gaussienne (`a = 20`, `M = 4000`).
-3. Estimation robuste du niveau de bruit sur les parties réelle et imaginaire des coefficients : écart-type estimé par la médiane (MAD) divisée par 0,6745.
-4. Seuil universel `alpha · sigma · sqrt(2 log N)` (alpha ajustable), puis seuillage doux.
-5. Reconstruction avec la fenêtre duale (`gabdual`, `idgtreal`) et affichage du SNR avant/après débruitage.
+1. Gaussian white noise is added to a speech signal.
+2. DGT with a Gaussian window (`a = 20`, `M = 4000`).
+3. Robust estimation of the noise level on the real and imaginary parts of the coefficients: standard deviation estimated by the median absolute deviation (MAD) divided by 0.6745.
+4. Universal threshold `alpha · sigma · sqrt(2 log N)` (adjustable alpha), followed by soft thresholding.
+5. Reconstruction with the dual window (`gabdual`, `idgtreal`) and display of the SNR before/after denoising.
 
-## Dépendances
+## Dependencies
 
 - MATLAB
-- [LTFAT](https://ltfat.github.io), à placer dans `ltfat/`
-- Un fichier `sounds/mspeech.wav` (non fourni)
+- [LTFAT](https://ltfat.github.io), to be placed in `ltfat/`
+- A file `sounds/mspeech.wav` (not provided)
 
-Les chemins sont relatifs au dossier courant.
+Paths are relative to the current folder.
